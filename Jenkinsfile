@@ -51,9 +51,13 @@ pipeline {
             steps {
                 // Run the Docker container from the built image with port 8000 mapped to the host
                 script {
+		try{
                    sh "docker container stop devops_container"
-                   sh "docker container rm devops_container"
+                   sh "docker container rm devops_container"}
+		catch{echo "container is not running}
+		finally{
                     sh "docker run -p 8000:80 -d --name devops_container ${env.IMAGE_NAME}"
+		 }
                 }
             }
         }
