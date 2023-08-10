@@ -54,7 +54,7 @@ pipeline {
 		try{
                    sh "docker container stop devops_container"
                    sh "docker container rm devops_container"}
-		catch{echo "container is not running}
+		catch(e){echo "container is not running}
 		finally{
                     sh "docker run -p 8000:80 -d --name devops_container ${env.IMAGE_NAME}"
 		 }
