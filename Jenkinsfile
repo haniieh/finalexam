@@ -15,9 +15,11 @@ pipeline {
             steps {
                 // Build the Docker image using the Dockerfile from the repository
                 script {
+		    echo "Building Docker image..."
                     def dockerImage = docker.build("devops-app:${env.BUILD_ID}", "-f Dockerfile .")
                     // Save the dockerImage variable as an environment variable for later use
-                    env.IMAGE_NAME = "devops-app:${env.BUILD_ID}"
+                    echo "Docker image built successfully"
+		    env.IMAGE_NAME = "devops-app:${env.BUILD_ID}"
                 }
             }
         }
